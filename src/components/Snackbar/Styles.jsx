@@ -1,9 +1,6 @@
 // @mui
 import { GlobalStyles } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-
-// ----------------------------------------------------------------------
-
 export default function StyledNotistack() {
   const theme = useTheme();
 
@@ -24,10 +21,10 @@ export default function StyledNotistack() {
             color: isLight ? theme.palette.common.white : theme.palette.grey[800],
             backgroundColor: isLight ? theme.palette.grey[900] : theme.palette.common.white,
             '&.notistack-MuiContent-success, &.notistack-MuiContent-error, &.notistack-MuiContent-warning, &.notistack-MuiContent-info':
-              {
-                color: theme.palette.text.primary,
-                backgroundColor: theme.palette.background.paper
-              },
+            {
+              color: theme.palette.text.primary,
+              backgroundColor: theme.palette.background.paper
+            },
             [theme.breakpoints.up('md')]: {
               minWidth: 240
             }

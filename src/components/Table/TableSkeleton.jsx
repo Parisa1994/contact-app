@@ -1,8 +1,6 @@
+import React from "react";
 // @mui
-
 import { Skeleton, TableCell, TableRow } from '@mui/material';
-
-// ----------------------------------------------------------------------
 
 export default function TableSkeleton({ ...other }) {
   return (

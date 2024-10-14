@@ -1,14 +1,8 @@
-'use client';
-
-// @mui
+import React from "react";
 
 import { Box, TablePagination } from '@mui/material';
 
-
-
 export default function TablePaginationCustom({
-  // dense,
-  // onChangeDense,
   rowsPerPageOptions = [5, 10, 25],
   buttons,
   sx,
@@ -17,9 +11,10 @@ export default function TablePaginationCustom({
   return (
     <Box
       sx={{
+
         position: 'relative',
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
         borderTop: '1px solid',
         borderColor: (theme) => (theme.palette.mode === 'light' ? 'grey.300' : 'grey.700'),
@@ -32,10 +27,10 @@ export default function TablePaginationCustom({
         sx={{ borderTop: 'none' }}
         rowsPerPageOptions={rowsPerPageOptions}
         component='div'
-        labelRowsPerPage='تعداد رکورد در هرصفحه:'
-        getItemAriaLabel={(type) => `رفتن به صفحه ${type}`}
+        labelRowsPerPage='The number of records per page:'
+        getItemAriaLabel={(type) => `go to page ${type}`}
         labelDisplayedRows={({ from, to, count }) =>
-          `${from}–${to} از ${count !== -1 ? count : `بیش از ${to}`} رکورد`
+          `${from}–${to} of ${count !== -1 ? count : ` ${to}`} records`
         }
         {...other}
       />

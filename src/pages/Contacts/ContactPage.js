@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   Container,
   Card,
-  CardHeader,
   Table,
   TableBody,
   TableContainer,
@@ -17,19 +16,22 @@ import {
   TableSkeleton,
   useTable,
 } from "../../components/Table";
+import Search from "./components/Search";
 
 import ContactsTableRow from "./components/ContactsTableRow";
 import { useCantacts } from "./../../services/Contacts/index";
 
 const ContactPage = () => {
-  //const [filters, setFilters] = useState({ is_active: "all" });
+  const [filters, setFilters] = useState({ first_name: "", last_name: "" });
 
   const TABLE_HEAD = [
     { id: "id", label: "id" },
-    { id: "avatar", label: "آواتار" },
-    { id: "first_name", label: "نام" },
-    { id: "last_name", label: "نام خانوادگی" },
-    { id: "phone", label: "تلفن" },
+    { id: "avatar", label: "Avatar" },
+    { id: "first_name", label: "FirstName" },
+    { id: "last_name", label: "LastName" },
+    { id: "phone", label: "Phone" },
+    { id: "address", label: "City" },
+    { id: "details", label: "Details" },
   ];
 
   const {
@@ -44,44 +46,37 @@ const ContactPage = () => {
     defaultRowsPerPage: 5,
     defaultCurrentPage: 0,
     defaultOrderBy: "createdAt",
-    defaultOrder: "desc",
   });
 
-  // const reducedFilters = {
-  //   ...(filters.search != "" && { search: filters.search }),
-  //   ...(filters.is_active !== "all" && {
-  //     is_active: filters.is_active === "not_active" ? false : true,
-  //   }),
-  //   ...(filters.dateFrom && { insert_date_after: filters.dateFrom }),
-  //   ...(filters.dateTo && { insert_date_before: filters.dateTo }),
-  // };
+  const reducedFilters = {
+    ...(filters.first_name && { first_name: { contains: filters.first_name } }),
+    ...(filters.last_name && { last_name: { contains: filters.last_name } }),
+  };
 
-  // const { contacts, count } = useCantacts({
-  //   offset: page * rowsPerPage,
-  //   ...reducedFilters,
-  //   limit: rowsPerPage,
-  //   sort: { order, orderBy },
-  // });
-
-  // useEffect(() => {
-  //   onChangePage(0);
-  // }, [onChangePage, filters.search]);
+  useEffect(() => {
+    onChangePage(0);
+  }, [onChangePage, filters]);
 
   const { contacts, count, isLoading } = useCantacts({
     skip: page * rowsPerPage || 0,
     limit: rowsPerPage || 5,
-    //sort: { order: "ccreatedAt DESC" },
+    where: JSON.stringify(reducedFilters),
+    sort: `${orderBy} ${order}`,
   });
+
+  const onApplyFilters = (newFilters) => {
+    setFilters(newFilters);
+    onChangePage(0);
+  };
 
   console.log(contacts?.data?.items);
 
   return (
-    <Container>
-      <Card>
-        <CardHeader>
-          <Typography>مشاهده فهرست کاربران</Typography>
-        </CardHeader>
-        <TableContainer sx={{ position: "relative", direction: "rtl" }}>
+    <Container sx={{ mt: 2 }}>
+      <Typography> List Contacts </Typography>
+      <Search onApplyFilters={onApplyFilters} />
+      <Card sx={{ mt: 10 }}>
+        <TableContainer sx={{ position: "relative" }}>
           <Table sx={{ minWidth: 800 }}>
             <TableHeadCustom
               headLabel={TABLE_HEAD}
