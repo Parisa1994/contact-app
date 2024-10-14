@@ -1,5 +1,3 @@
-"use client";
-
 import { useCallback, useState } from "react";
 
 export default function useTable(props) {
@@ -7,8 +5,8 @@ export default function useTable(props) {
 
   const [orderBy, setOrderBy] = useState(props?.defaultOrderBy || "name");
 
-  const [order, setOrder] =
-    (useState < "asc") | ("desc" > (props?.defaultOrder || "asc"));
+  const [order, setOrder] = useState(props?.defaultOrder || "asc");
+  // (useState < "asc") | ("desc" > (props?.defaultOrder || "asc"));
 
   const [page, setPage] = useState(props?.defaultCurrentPage || 0);
 
@@ -60,8 +58,8 @@ export default function useTable(props) {
     setSelected([]);
   }, []);
 
-  const onChangePage = useCallback(() => {
-    setPage();
+  const onChangePage = useCallback((_, newPage) => {
+    setPage(newPage);
   }, []);
 
   const onChangeRowsPerPage = useCallback((event) => {

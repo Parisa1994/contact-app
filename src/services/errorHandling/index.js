@@ -1,13 +1,8 @@
-import { enqueueSnackbar } from "./../../components/Snackbar";
+import { enqueueSnackbar } from "../../components/Snackbar";
 
-export const ServerErrorHandling = (
-  err: any,
-  hasToast = true,
-  status: number = 0
-) => {
+export const ServerErrorHandling = (err, hasToast = true, status = 0) => {
   switch (status) {
     case 403:
-
     case 401:
       enqueueSnackbar(err?.message, { variant: "error" });
       break;

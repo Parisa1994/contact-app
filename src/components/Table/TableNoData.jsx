@@ -1,18 +1,12 @@
 // @mui
-import { TableCell, TableRow } from '@mui/material';
-
-//
-import { EmptyContent } from '../EmptyContent';
-
-// ----------------------------------------------------------------------
-
+import { TableCell, TableRow, Typography } from '@mui/material';
 
 export default function TableNoData({ isNotFound }) {
   return (
     <TableRow>
       {isNotFound ? (
         <TableCell colSpan={12}>
-          <EmptyContent
+          <Typography
             title='هیچ داده ای یافت نشد.'
             sx={{
               '& span.MuiBox-root': { height: 160 }

@@ -1,6 +1,6 @@
 import qs from "query-string";
 
-export default function queryBuilder(param: any = {}) {
+export default function queryBuilder(param = {}) {
   if (typeof param !== "object") {
     param = qs.parse(param);
   }
