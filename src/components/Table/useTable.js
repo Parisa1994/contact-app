@@ -1,12 +1,9 @@
 import { useCallback, useState } from "react";
 
 export default function useTable(props) {
-  const [dense, setDense] = useState(!!props?.defaultDense);
-
   const [orderBy, setOrderBy] = useState(props?.defaultOrderBy || "name");
 
-  const [order, setOrder] = useState(props?.defaultOrder || "asc");
-  // (useState < "asc") | ("desc" > (props?.defaultOrder || "asc"));
+  const [order, setOrder] = useState(props?.defaultOrder || "createdAt");
 
   const [page, setPage] = useState(props?.defaultCurrentPage || 0);
 
@@ -67,12 +64,7 @@ export default function useTable(props) {
     setRowsPerPage(parseInt(event.target.value, 10));
   }, []);
 
-  const onChangeDense = useCallback((event) => {
-    setDense(event.target.checked);
-  }, []);
-
   return {
-    dense,
     order,
     page,
     orderBy,
@@ -84,11 +76,10 @@ export default function useTable(props) {
     //
     onSort,
     onChangePage,
-    onChangeDense,
+
     onChangeRowsPerPage,
     //
     setPage,
-    setDense,
     setOrder,
     setOrderBy,
     setSelected,

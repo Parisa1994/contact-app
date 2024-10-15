@@ -6,27 +6,31 @@ export default function TablePaginationCustom({
   rowsPerPageOptions = [5, 10, 25],
   buttons,
   sx,
+  onPageChange,
+  page = 0,
   ...other
 }) {
   return (
+
     <Box
       sx={{
-
         position: 'relative',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         borderTop: '1px solid',
-        borderColor: (theme) => (theme.palette.mode === 'light' ? 'grey.300' : 'grey.700'),
         gap: 1,
-        ...sx
+        ...sx,
       }}
+
     >
       <Box sx={{ ml: 2 }}>{buttons}</Box>
       <TablePagination
         sx={{ borderTop: 'none' }}
         rowsPerPageOptions={rowsPerPageOptions}
         component='div'
+        page={page}
+        onPageChange={onPageChange}
         labelRowsPerPage='The number of records per page:'
         getItemAriaLabel={(type) => `go to page ${type}`}
         labelDisplayedRows={({ from, to, count }) =>
@@ -37,3 +41,4 @@ export default function TablePaginationCustom({
     </Box>
   );
 }
+

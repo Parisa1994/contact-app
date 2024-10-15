@@ -1,4 +1,3 @@
-import { enqueueSnackbar } from "../components/Snackbar";
 import { ServerErrorHandling } from "./errorHandling";
 import queryBuilder from "../utils/queryBuilder";
 
@@ -50,7 +49,7 @@ const ApiCreator = async ({
     });
   } catch (error) {
     if (error instanceof TypeError) {
-      enqueueSnackbar(
+      console.log(
         "مشکل در اتصال به اینترنت در صورت استفاده از فیلتر شکن آن را خاموش کنید",
         {
           variant: "error",

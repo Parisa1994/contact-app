@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   Container,
   Card,
@@ -16,12 +16,20 @@ import {
   TableSkeleton,
   useTable,
 } from "../../components/Table";
+
 import Search from "./components/Search";
 
 import ContactsTableRow from "./components/ContactsTableRow";
+
+//services
 import { useCantacts } from "./../../services/Contacts/index";
 
+//context
+import { ContactContext } from "./../../context/ContactProvider";
+
 const ContactPage = () => {
+  const { recentlyVisitedContacts } = useContext(ContactContext);
+
   const [filters, setFilters] = useState({ first_name: "", last_name: "" });
 
   const TABLE_HEAD = [
@@ -43,9 +51,9 @@ const ContactPage = () => {
     onChangePage,
     onChangeRowsPerPage,
   } = useTable({
-    defaultRowsPerPage: 5,
+    defaultRowsPerPage: 10,
     defaultCurrentPage: 0,
-    defaultOrderBy: "createdAt",
+    defaultOrder: "createdAt",
   });
 
   const reducedFilters = {
@@ -69,12 +77,18 @@ const ContactPage = () => {
     onChangePage(0);
   };
 
-  console.log(contacts?.data?.items);
-
   return (
     <Container sx={{ mt: 2 }}>
       <Typography> List Contacts </Typography>
       <Search onApplyFilters={onApplyFilters} />
+      {recentlyVisitedContacts.length > 0 && (
+        <Card sx={{ mt: 2, p: 2 }}>
+          <Typography variant="h6">Recently Visited Contacts</Typography>
+          {recentlyVisitedContacts.map((contact) => (
+            <ContactsTableRow key={contact.id} row={contact} />
+          ))}
+        </Card>
+      )}
       <Card sx={{ mt: 10 }}>
         <TableContainer sx={{ position: "relative" }}>
           <Table sx={{ minWidth: 800 }}>

@@ -10,7 +10,7 @@ const Search = ({ onApplyFilters }) => {
         if (tempFilters.first_name.length >= 5 || tempFilters.last_name.length >= 5) {
             handleApplyFilters();
         }
-    }, [tempFilters.first_name, tempFilters.last_name]);
+    }, [tempFilters?.first_name, tempFilters?.last_name]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -44,7 +44,7 @@ const Search = ({ onApplyFilters }) => {
             alignItems="center"
             direction="row"
             sx={{ px: 2.5, py: 3 }}
-            justifyContent="space-between" w
+            justifyContent="space-between"
         >
 
             <Stack
