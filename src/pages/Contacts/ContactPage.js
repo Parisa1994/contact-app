@@ -84,9 +84,11 @@ const ContactPage = () => {
       {recentlyVisitedContacts.length > 0 && (
         <Card sx={{ mt: 2, p: 2 }}>
           <Typography variant="h6">Recently Visited Contacts</Typography>
-          {recentlyVisitedContacts.map((contact) => (
-            <ContactsTableRow key={contact.id} row={contact} />
-          ))}
+          {recentlyVisitedContacts.map((contact) =>
+            contact && contact.id ? (
+              <ContactsTableRow key={contact.id} row={contact} />
+            ) : null
+          )}
         </Card>
       )}
       <Card sx={{ mt: 10 }}>

@@ -16,13 +16,9 @@ const ContactDetailsPage = ({ contact }) => {
   const { row } = location.state || {};
   const { addVisitedContact } = useContext(ContactContext);
 
-  // if (!row) {
-  //   return <Typography variant="h6">No contact details available</Typography>;
-  // }
-
   useEffect(() => {
     if (row) {
-      addVisitedContact(row); // Track the visited contact
+      addVisitedContact(row);
     }
   }, [row, addVisitedContact]);
 
