@@ -8,7 +8,6 @@ const ContactsTableRow = ({ row }) => {
     const navigate = useNavigate();
 
     const handleDetailsClick = () => {
-
         navigate(`/contact-details/${id}`, { state: { row } });
     };
 

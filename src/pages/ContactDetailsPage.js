@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   Container,
   List,
@@ -8,19 +8,44 @@ import {
   ListItemText,
   Avatar,
   Typography,
+  Button,
 } from "@mui/material";
 import { ContactContext } from "./../context/ContactProvider";
+import { useCantacts } from "../services/Contacts/index";
 
-const ContactDetailsPage = ({ contact }) => {
+const ContactDetailsPage = () => {
   const location = useLocation();
-  const { row } = location.state || {};
+  const navigate = useNavigate();
+  const { id } = useParams();
   const { addVisitedContact } = useContext(ContactContext);
 
+  const [row, setRow] = useState(null);
+
   useEffect(() => {
-    if (row) {
-      addVisitedContact(row);
+    if (location.state?.row) {
+      setRow(location.state.row);
+      addVisitedContact(location.state.row);
     }
-  }, [row, addVisitedContact]);
+  }, [location.state, addVisitedContact]);
+
+  const {
+    contacts: { data, isLoading, error },
+  } = useCantacts({}, id);
+
+  useEffect(() => {
+    if (!row && data?.data) {
+      setRow(data?.data);
+      addVisitedContact(data?.data);
+    }
+  }, [data, row, addVisitedContact]);
+
+  if (isLoading) {
+    return <Typography variant="h6">Loading...</Typography>;
+  }
+
+  if (error) {
+    return <Typography variant="h6">Error fetching contact details</Typography>;
+  }
 
   if (!row) {
     return <Typography variant="h6">No contact details available</Typography>;
@@ -52,7 +77,10 @@ const ContactDetailsPage = ({ contact }) => {
           />
         </ListItem>
         <ListItem>
-          <ListItemText primary="Gender" secondary={row?.gender} />
+          <ListItemText
+            primary="Gender"
+            secondary={row?.gender || "No Gender"}
+          />
         </ListItem>
         <ListItem>
           <ListItemText
@@ -75,10 +103,9 @@ const ContactDetailsPage = ({ contact }) => {
         <ListItem>
           <ListItemText
             primary="Company"
-            secondary={row?.company ? row?.company : "no Comapany"}
+            secondary={row?.company ? row?.company : "no Company"}
           />
         </ListItem>
-        company
         <ListItem>
           <ListItemText
             primary="Address"
@@ -86,6 +113,14 @@ const ContactDetailsPage = ({ contact }) => {
           />
         </ListItem>
       </List>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => navigate(-1)}
+        sx={{ mt: 2 }}
+      >
+        Back
+      </Button>
     </Container>
   );
 };
