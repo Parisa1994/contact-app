@@ -46,6 +46,7 @@
   },
   "author": "parisa zamani ",
   "devDependencies": {
+    "@types/node": "^22.7.5",
     "tailwindcss": "^3.4.13"
   }
 }
