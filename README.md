@@ -1,4 +1,4 @@
-# 📇 Snapp Contacts App  
+# 📇 Contacts App  
 
 A modern single-page application (SPA) for managing Snapp passengers' contact list.  
 Built with **React** and optimized for a smooth, responsive user experience.  
