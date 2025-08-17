@@ -34,3 +34,52 @@ cd frontend
 npm install
 ▶️ Run the Application
 npm start
+The app will run on http://localhost:3000.
+
+🏗️ Build for Production
+npm run build
+📂 Project Structure
+snap-contact-app/
+├── public/          # Static assets
+├── src/
+│   ├── components/  # Reusable UI components
+│   ├── pages/       # Home & Contact Details pages
+│   ├── hooks/       # Custom React hooks
+│   ├── utils/       # Helper functions
+│   └── App.tsx      # Root component
+└── package.json
+
+🛠️ Tech Stack
+
+⚛️ React – Component-based UI
+
+🔍 React Router – Routing between pages
+
+🎨 CSS / Tailwind (optional) – Styling
+
+🗂️ Context / Hooks – State management
+Contributing
+
+Fork the repository
+
+Create a new branch (git checkout -b feature/amazing-feature)
+
+Commit your changes (git commit -m 'Add amazing feature')
+
+Push to the branch (git push origin feature/amazing-feature)
+
+Open a Pull Request
+
+📜 License
+
+This project is licensed under the MIT License – see the LICENSE file for details.
+
+👩‍💻 Author
+
+Parisa Zamani
+📧 parisa.zmni1994@gmail.com
+🔗 GitHub Profile
+
+🌐 Demo
+
+🚀 (Add link to your deployed app here: Netlify or Vercel)
