@@ -1,45 +1,36 @@
-# Snapp Contacts App
+# 📇 Snapp Contacts App  
 
-This project is a single-page application (SPA) for managing the contact list of Snapp passengers. It includes two pages: a home page that displays the list of contacts and a contact details page that shows more information about each contact.
+A modern single-page application (SPA) for managing Snapp passengers' contact list.  
+Built with **React** and optimized for a smooth, responsive user experience.  
 
-## Features
+---
 
-- **Home Page:** Displays a list of contacts with search functionality based on name or phone number.
-- **Frequently Visited Contacts:** Shows the last 4 contacts the user has visited.
-- **Contact Details:** Displays detailed information for each contact.
+## ✨ Features  
 
-## Getting Started
+- **🏠 Home Page** – View a list of contacts with **search** by name or phone number.  
+- **⭐ Frequently Visited** – Quick access to the **last 4 visited contacts**.  
+- **👤 Contact Details** – Display full information about each contact.  
+- **⚡ Fast & Responsive** – Optimized build for production.  
 
-### Prerequisites
+---
 
-- **Node.js** and **npm** must be installed on your system.
+## 🚀 Getting Started  
 
-### Installation
+### ✅ Prerequisites  
+Make sure you have the following installed:  
+- [Node.js](https://nodejs.org/) (LTS recommended)  
+- npm (comes with Node.js)  
 
-1. **Clone the project:**
-   ```bash
-   git clone [https://github.com/Parisa1994/snap-contact-app.git]
-   cd frontend
-   ```
+### 📥 Installation  
 
-Install dependencies:
+```bash
+# Clone the repository
+git clone https://github.com/Parisa1994/snap-contact-app.git
 
-### `npm install `
+# Move into project folder
+cd frontend
 
-Run the application:
-
-### `npm start`
-
-To build the application for production, use:
-
-### `npm run build`
-
-This command builds the app for production in the build folder and optimizes it for best performance.
-
-Learn More
-For more information about Create React App and React, you can check the following documentation:
-
-Create React App Documentation
-React Documentation
-Author
-Parisa Zamani - [parisa.zmni1994@gmail.com]
+# Install dependencies
+npm install
+▶️ Run the Application
+npm start
