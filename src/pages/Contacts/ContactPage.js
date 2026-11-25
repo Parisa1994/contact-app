@@ -23,7 +23,7 @@ import Search from "./components/Search";
 import ContactsTableRow from "./components/ContactsTableRow";
 
 //services
-import { useCantacts } from "./../../services/Contacts/index";
+import { isDemoMode, useCantacts } from "./../../services/Contacts/index";
 
 //context
 import { ContactContext } from "./../../context/ContactProvider";
@@ -82,6 +82,7 @@ const ContactPage = () => {
   return (
     <Container sx={{ mt: 2 }}>
       <Typography> List Contacts </Typography>
+      {isDemoMode && <Typography color="text.secondary">Demo mode — all contacts are fictional.</Typography>}
       <Search onApplyFilters={onApplyFilters} />
       {recentlyVisitedContacts.length > 0 && (
         <Card sx={{ mt: 2, p: 2 }}>

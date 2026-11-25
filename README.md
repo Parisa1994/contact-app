@@ -4,7 +4,7 @@ A React application for browsing contacts, searching by first or last name, view
 
 ## Getting started
 
-Requirements: Node.js and npm, and a compatible contacts API.
+Requirements: Node.js and npm. By default the app uses fictional sample contacts and does not need a backend.
 
 ```bash
 git clone https://github.com/Parisa1994/contact-app.git
@@ -13,9 +13,20 @@ npm ci
 npm start
 ```
 
-Open http://localhost:3000. The development configuration in `.env.development` points to `http://localhost:1337/`. Set `REACT_APP_SERVER_BASE_URL` to your API base URL (including its trailing slash) in `.env.local` to override it, then restart the development server.
+Open http://localhost:3000. Demo mode supports search, sorting, pagination, and direct links to sample contact details. Sample data is fictional.
 
-This repository does not include the backend. The contacts screen expects a `GET passenger` endpoint accepting pagination, filter and ordering query parameters and returning an object with `data.items` and `meta.total`. If the API is unavailable, the app displays a retry option. Details can be reopened from the list or from the locally stored recently visited contacts; a direct link to an unknown contact cannot retrieve it without a detail endpoint.
+## Connecting a real API
+
+Create `.env.local` with the following values and restart the development server:
+
+```env
+REACT_APP_DATA_SOURCE=api
+REACT_APP_SERVER_BASE_URL=http://localhost:1337/
+```
+
+Use your API base URL including the trailing slash. Do not put secrets in `REACT_APP_` variables: they are exposed in the browser.
+
+This repository does not include the backend. In API mode, the contacts screen expects a `GET passenger` endpoint accepting pagination, filter and ordering query parameters and returning an object with `items` and `meta.total`. If the API is unavailable, the app displays a retry option. In API mode, a direct link to an unknown contact cannot retrieve it without a detail endpoint.
 
 ```bash
 npm test -- --watch=false

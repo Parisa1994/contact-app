@@ -10,12 +10,14 @@ import {
   Typography,
 } from "@mui/material";
 import { ContactContext } from "./../context/ContactProvider";
+import { isDemoMode } from "../services/Contacts";
+import { getDemoContact } from "../services/Contacts/demo";
 
 const ContactDetailsPage = () => {
   const location = useLocation();
   const { id } = useParams();
   const { addVisitedContact, recentlyVisitedContacts } = useContext(ContactContext);
-  const row = location.state?.row || recentlyVisitedContacts.find((contact) => String(contact.id) === id);
+  const row = location.state?.row || (isDemoMode ? getDemoContact(id) : undefined) || recentlyVisitedContacts.find((contact) => String(contact.id) === id);
 
   useEffect(() => {
     if (row) {
@@ -29,6 +31,7 @@ const ContactDetailsPage = () => {
 
   return (
     <Container sx={{ p: 4 }}>
+      <Link to="/">Back to contacts</Link>
       <Typography variant="h4" gutterBottom>
         Contact Details
       </Typography>

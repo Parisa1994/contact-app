@@ -1,12 +1,13 @@
 import React, { createContext, useState, useEffect, useCallback } from "react";
 
 export const ContactContext = createContext();
+const storageKey = process.env.REACT_APP_DATA_SOURCE === "api" ? "recentlyVisitedContacts" : "recentlyVisitedDemoContacts";
 
 export const ContactProvider = ({ children }) => {
   const [recentlyVisitedContacts, setRecentlyVisitedContacts] = useState([]);
 
   useEffect(() => {
-    const storedContacts = localStorage.getItem("recentlyVisitedContacts");
+    const storedContacts = localStorage.getItem(storageKey);
     if (storedContacts) {
       try {
         const parsedContacts = JSON.parse(storedContacts);
@@ -20,7 +21,7 @@ export const ContactProvider = ({ children }) => {
   useEffect(() => {
     if (recentlyVisitedContacts.length > 0) {
       localStorage.setItem(
-        "recentlyVisitedContacts",
+        storageKey,
         JSON.stringify(recentlyVisitedContacts)
       );
     }
