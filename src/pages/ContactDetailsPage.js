@@ -30,12 +30,12 @@ const ContactDetailsPage = () => {
   }
 
   return (
-    <Container sx={{ p: 4 }}>
-      <Link to="/">Back to contacts</Link>
-      <Typography variant="h4" gutterBottom>
+    <Container maxWidth="sm" sx={{ py: { xs: 4, md: 7 } }}>
+      <Link to="/" style={{ color: '#315ab4', fontWeight: 600, textDecoration: 'none' }}>← Back to contacts</Link>
+      <Typography variant="h4" gutterBottom sx={{ mt: 3, fontWeight: 750, letterSpacing: '-.03em' }}>
         Contact Details
       </Typography>
-      <List>
+      <List sx={{ mt: 3, p: 2, bgcolor: '#fff', border: '1px solid #e8edf5', borderRadius: 3, boxShadow: '0 12px 35px rgba(36, 58, 95, .05)' }}>
         <ListItem>
           <ListItemAvatar>
             {row.avatar ? (

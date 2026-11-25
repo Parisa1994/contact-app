@@ -43,15 +43,15 @@ const Search = ({ onApplyFilters }) => {
         <Stack
             spacing={2}
             alignItems="center"
-            direction="row"
-            sx={{ px: 2.5, py: 3 }}
+            direction={{ xs: 'column', sm: 'row' }}
+            sx={{ p: { xs: 2, sm: 3 }, alignItems: { xs: 'stretch', sm: 'center' } }}
             justifyContent="space-between"
         >
 
             <Stack
-                direction="row"
+                direction={{ xs: 'column', sm: 'row' }}
                 spacing={2}
-                sx={{ flexGrow: 1 }}
+                sx={{ flexGrow: 1, width: '100%' }}
             >
                 <TextField
                     label="First name"
@@ -68,7 +68,7 @@ const Search = ({ onApplyFilters }) => {
                         ),
                     }}
                     fullWidth
-                    sx={{ width: { xs: '100%', md: '300px' } }}
+                    sx={{ maxWidth: { sm: 280 }, bgcolor: '#fff' }}
                 />
 
                 <TextField
@@ -86,7 +86,7 @@ const Search = ({ onApplyFilters }) => {
                         ),
                     }}
                     fullWidth
-                    sx={{ width: { xs: '100%', md: '300px' } }}
+                    sx={{ maxWidth: { sm: 280 }, bgcolor: '#fff' }}
                 />
             </Stack>
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -97,16 +97,15 @@ const Search = ({ onApplyFilters }) => {
                         onClick={resetFilters}
                         variant="outlined"
                     >
-                        Delete Filter
+                        Clear
                     </Button>
                 )}
                 <Button
-                    color="secondary"
-                    sx={{ color: 'text.primary' }}
-                    variant="outlined"
+                    sx={{ textTransform: 'none', px: 3, borderRadius: 2, fontWeight: 600 }}
+                    variant="contained"
                     onClick={handleApplyFilters}
                 >
-                    Filter
+                    Search
                 </Button>
             </Box>
         </Stack>

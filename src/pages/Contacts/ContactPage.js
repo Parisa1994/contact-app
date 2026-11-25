@@ -7,6 +7,8 @@ import {
   TableContainer,
   Typography,
   Button,
+  Box,
+  Chip,
 } from "@mui/material";
 
 // components
@@ -34,10 +36,10 @@ const ContactPage = () => {
   const [filters, setFilters] = useState({ first_name: "", last_name: "" });
 
   const TABLE_HEAD = [
-    { id: "id", label: "id" },
+    { id: "id", label: "ID" },
     { id: "avatar", label: "Avatar" },
-    { id: "first_name", label: "FirstName" },
-    { id: "last_name", label: "LastName" },
+    { id: "first_name", label: "First name" },
+    { id: "last_name", label: "Last name" },
     { id: "phone", label: "Phone" },
     { id: "address", label: "City" },
     { id: "details", label: "Details" },
@@ -80,24 +82,32 @@ const ContactPage = () => {
   }, [onChangePage]);
 
   return (
-    <Container sx={{ mt: 2 }}>
-      <Typography> List Contacts </Typography>
-      {isDemoMode && <Typography color="text.secondary">Demo mode — all contacts are fictional.</Typography>}
-      <Search onApplyFilters={onApplyFilters} />
+    <Container maxWidth="lg" sx={{ py: { xs: 3, md: 6 } }}>
+      <Box sx={{ mb: 4 }}>
+        <Typography sx={{ color: '#315ab4', fontSize: 13, letterSpacing: '.12em', fontWeight: 800, textTransform: 'uppercase', mb: 1 }}>Contacts workspace</Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 1.5 }}>
+          <Typography component="h1" variant="h4" sx={{ fontWeight: 750, letterSpacing: '-.035em' }}>Your contacts</Typography>
+          {isDemoMode && <Chip label="Demo data" size="small" sx={{ bgcolor: '#e7efff', color: '#315ab4', fontWeight: 700 }} />}
+        </Box>
+        <Typography sx={{ mt: 1, color: '#66758a' }}>Find the people you need, all in one place.{isDemoMode && ' All contacts are fictional.'}</Typography>
+      </Box>
+      <Card elevation={0} sx={{ border: '1px solid #e8edf5', borderRadius: 3, boxShadow: '0 12px 35px rgba(36, 58, 95, .05)' }}><Search onApplyFilters={onApplyFilters} /></Card>
       {recentlyVisitedContacts.length > 0 && (
-        <Card sx={{ mt: 2, p: 2 }}>
-          <Typography variant="h6">Recently Visited Contacts</Typography>
-          <Table><TableBody>{recentlyVisitedContacts.map((contact) =>
+        <Card elevation={0} sx={{ mt: 3, p: { xs: 2, sm: 3 }, border: '1px solid #e8edf5', borderRadius: 3 }}>
+          <Typography variant="h6" sx={{ fontWeight: 700, fontSize: 18 }}>Recently viewed</Typography>
+          <Typography variant="body2" sx={{ color: '#66758a', mb: 1 }}>Pick up where you left off.</Typography>
+          <TableContainer><Table sx={{ minWidth: 680 }}><TableBody>{recentlyVisitedContacts.map((contact) =>
             contact && contact.id ? (
               <ContactsTableRow key={contact.id} row={contact} />
             ) : null
-          )}</TableBody></Table>
+          )}</TableBody></Table></TableContainer>
         </Card>
       )}
-      <Card sx={{ mt: 10 }}>
+      <Card elevation={0} sx={{ mt: 3, border: '1px solid #e8edf5', borderRadius: 3, boxShadow: '0 12px 35px rgba(36, 58, 95, .05)' }}>
+        <Box sx={{ px: 3, pt: 2.5, pb: 1 }}><Typography variant="h6" sx={{ fontSize: 18, fontWeight: 700 }}>Contact directory</Typography><Typography variant="body2" sx={{ color: '#66758a' }}>{count} {count === 1 ? 'contact' : 'contacts'} found</Typography></Box>
         <TableContainer sx={{ position: "relative" }}>
           <Table sx={{ minWidth: 800 }}>
-            <TableHeadCustom
+            <TableHeadCustom sx={{ '& th': { backgroundColor: '#f8faff', color: '#64748b', fontWeight: 700, fontSize: 13, borderColor: '#edf1f6' } }}
               headLabel={TABLE_HEAD}
               onSort={onSort}
               order={order}

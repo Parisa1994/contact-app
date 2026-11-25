@@ -2,6 +2,8 @@
 
 A React application for browsing contacts, searching by first or last name, viewing details and revisiting up to four recently viewed contacts.
 
+**[Live demo](https://parisa-contacts-demo.astralpeony19.chatgpt.site/)** — uses fictional contacts and requires no backend.
+
 ## Getting started
 
 Requirements: Node.js and npm. By default the app uses fictional sample contacts and does not need a backend.
