@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableCell, TableRow } from '@mui/material';
+import { Button, TableCell, TableRow } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -22,8 +22,7 @@ const ContactsTableRow = ({ row }) => {
             <TableCell>{last_name}</TableCell>
             <TableCell>{phone}</TableCell>
             <TableCell>{address}</TableCell>
-            <TableCell onClick={handleDetailsClick}>
-                DetailsContact </TableCell>
+            <TableCell><Button onClick={handleDetailsClick}>View details</Button></TableCell>
         </TableRow>
     );
 };

@@ -4,19 +4,20 @@ export default function queryBuilder(param = {}) {
   if (typeof param !== "object") {
     param = qs.parse(param);
   }
-  const { limit = undefined, count = undefined, sort = "", ...params } = param;
+  const { limit = undefined, sort = "", ...params } = param;
+  delete params.count;
   let ordering = "";
 
-  if (sort.order) {
-    if (typeof sort === "object") {
+  if (sort) {
+    if (typeof sort === "object" && sort.order) {
       ordering = sort.order === "asc" ? sort.orderBy : "-" + sort.orderBy;
-    } else {
+    } else if (typeof sort === "string") {
       ordering = sort;
     }
   }
 
   return `?${qs.stringify(
-    { limit, ...(ordering != "" && { ordering: ordering }), ...params },
+    { limit, ...(ordering !== "" && { ordering: ordering }), ...params },
     { arrayFormat: "comma" }
   )}`;
 }

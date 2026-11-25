@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useCallback, useContext, useState, useEffect } from "react";
 import {
   Container,
   Card,
@@ -6,6 +6,7 @@ import {
   TableBody,
   TableContainer,
   Typography,
+  Button,
 } from "@mui/material";
 
 // components
@@ -53,7 +54,8 @@ const ContactPage = () => {
   } = useTable({
     defaultRowsPerPage: 10,
     defaultCurrentPage: 0,
-    defaultOrder: "createdAt",
+    defaultOrderBy: "id",
+    defaultOrder: "asc",
   });
 
   const reducedFilters = {
@@ -62,20 +64,20 @@ const ContactPage = () => {
   };
 
   useEffect(() => {
-    onChangePage(0);
+    onChangePage(null, 0);
   }, [onChangePage, filters]);
 
-  const { contacts, count, isLoading } = useCantacts({
+  const { contacts, count } = useCantacts({
     skip: page * rowsPerPage || 0,
     limit: rowsPerPage || 5,
     where: JSON.stringify(reducedFilters),
     sort: `${orderBy} ${order}`,
   });
 
-  const onApplyFilters = (newFilters) => {
+  const onApplyFilters = useCallback((newFilters) => {
     setFilters(newFilters);
-    onChangePage(0);
-  };
+    onChangePage(null, 0);
+  }, [onChangePage]);
 
   return (
     <Container sx={{ mt: 2 }}>
@@ -84,11 +86,11 @@ const ContactPage = () => {
       {recentlyVisitedContacts.length > 0 && (
         <Card sx={{ mt: 2, p: 2 }}>
           <Typography variant="h6">Recently Visited Contacts</Typography>
-          {recentlyVisitedContacts.map((contact) =>
+          <Table><TableBody>{recentlyVisitedContacts.map((contact) =>
             contact && contact.id ? (
               <ContactsTableRow key={contact.id} row={contact} />
             ) : null
-          )}
+          )}</TableBody></Table>
         </Card>
       )}
       <Card sx={{ mt: 10 }}>
@@ -101,10 +103,12 @@ const ContactPage = () => {
               orderBy={orderBy}
             />
             <TableBody>
-              {isLoading ? (
+              {contacts.isLoading ? (
                 [...Array(rowsPerPage)].map((_, index) => (
                   <TableSkeleton key={index} />
                 ))
+              ) : contacts.isError ? (
+                <tr><td colSpan={7}><Typography role="alert" sx={{ p: 2 }}>Could not load contacts. Check that the API is running. <Button onClick={() => contacts.refetch()}>Retry</Button></Typography></td></tr>
               ) : contacts?.data &&
                 contacts?.data?.items &&
                 contacts?.data?.items?.length > 0 ? (

@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Api from "./../index";
 
 export const useCantacts = (query) => {
-  const [count, setCount] = useState(10);
   const contacts = useQuery({
     queryKey: ["contacts-list", query],
 
@@ -14,11 +12,5 @@ export const useCantacts = (query) => {
     staleTime: 0,
   });
 
-  useEffect(() => {
-    if (contacts.data) {
-      setCount(contacts?.data?.meta?.total);
-    }
-  }, [contacts.data]);
-
-  return { contacts, count };
+  return { contacts, count: contacts.data?.meta?.total ?? 0 };
 };

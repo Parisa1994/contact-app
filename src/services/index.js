@@ -48,16 +48,7 @@ const ApiCreator = async ({
       }
     });
   } catch (error) {
-    if (error instanceof TypeError) {
-      console.log(
-        "مشکل در اتصال به اینترنت در صورت استفاده از فیلتر شکن آن را خاموش کنید",
-        {
-          variant: "error",
-        }
-      );
-    } else {
-      throw error;
-    }
+    throw error;
   }
 };
 

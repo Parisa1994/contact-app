@@ -7,12 +7,7 @@ export default function TableNoData({ isNotFound }) {
     <TableRow>
       {isNotFound ? (
         <TableCell colSpan={12}>
-          <Typography
-            title='هیچ داده ای یافت نشد.'
-            sx={{
-              '& span.MuiBox-root': { height: 160 }
-            }}
-          />
+          <Typography sx={{ py: 3 }}>No contacts found.</Typography>
         </TableCell>
       ) : (
         <TableCell colSpan={12} sx={{ p: 0 }} />

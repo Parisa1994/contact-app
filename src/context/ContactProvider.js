@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useCallback } from "react";
 
 export const ContactContext = createContext();
 
@@ -8,10 +8,12 @@ export const ContactProvider = ({ children }) => {
   useEffect(() => {
     const storedContacts = localStorage.getItem("recentlyVisitedContacts");
     if (storedContacts) {
-      const parsedContacts = JSON.parse(storedContacts);
-      setRecentlyVisitedContacts(
-        parsedContacts.filter((contact) => contact !== null)
-      );
+      try {
+        const parsedContacts = JSON.parse(storedContacts);
+        if (Array.isArray(parsedContacts)) setRecentlyVisitedContacts(parsedContacts.filter(Boolean));
+      } catch (error) {
+        console.warn("Could not restore recently visited contacts", error);
+      }
     }
   }, []);
 
@@ -24,14 +26,14 @@ export const ContactProvider = ({ children }) => {
     }
   }, [recentlyVisitedContacts]);
 
-  const addVisitedContact = (contact) => {
+  const addVisitedContact = useCallback((contact) => {
     if (!contact || !contact.id) return;
     setRecentlyVisitedContacts((prevContacts) => {
       const updatedContacts = prevContacts.filter((c) => c.id !== contact.id);
       updatedContacts.unshift(contact);
       return updatedContacts.slice(0, 4);
     });
-  };
+  }, []);
 
   // const addVisitedContact = (contact) => {
   //   setRecentlyVisitedContacts((prevContacts) => {

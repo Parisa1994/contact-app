@@ -1,85 +1,27 @@
-# 📇 Contacts App  
+# Contacts App
 
-A modern single-page application (SPA) for managing Snapp passengers' contact list.  
-Built with **React** and optimized for a smooth, responsive user experience.  
+A React application for browsing contacts, searching by first or last name, viewing details and revisiting up to four recently viewed contacts.
 
----
+## Getting started
 
-## ✨ Features  
-
-- **🏠 Home Page** – View a list of contacts with **search** by name or phone number.  
-- **⭐ Frequently Visited** – Quick access to the **last 4 visited contacts**.  
-- **👤 Contact Details** – Display full information about each contact.  
-- **⚡ Fast & Responsive** – Optimized build for production.  
-
----
-
-## 🚀 Getting Started  
-
-### ✅ Prerequisites  
-Make sure you have the following installed:  
-- [Node.js](https://nodejs.org/) (LTS recommended)  
-- npm (comes with Node.js)  
-
-### 📥 Installation  
+Requirements: Node.js and npm, and a compatible contacts API.
 
 ```bash
-# Clone the repository
-git clone https://github.com/Parisa1994/snap-contact-app.git
-
-# Move into project folder
-cd frontend
-
-# Install dependencies
-npm install
-▶️ Run the Application
+git clone https://github.com/Parisa1994/contact-app.git
+cd contact-app
+npm ci
 npm start
-The app will run on http://localhost:3000.
+```
 
-🏗️ Build for Production
+Open http://localhost:3000. The development configuration in `.env.development` points to `http://localhost:1337/`. Set `REACT_APP_SERVER_BASE_URL` to your API base URL (including its trailing slash) in `.env.local` to override it, then restart the development server.
+
+This repository does not include the backend. The contacts screen expects a `GET passenger` endpoint accepting pagination, filter and ordering query parameters and returning an object with `data.items` and `meta.total`. If the API is unavailable, the app displays a retry option. Details can be reopened from the list or from the locally stored recently visited contacts; a direct link to an unknown contact cannot retrieve it without a detail endpoint.
+
+```bash
+npm test -- --watch=false
 npm run build
-📂 Project Structure
-snap-contact-app/
-├── public/          # Static assets
-├── src/
-│   ├── components/  # Reusable UI components
-│   ├── pages/       # Home & Contact Details pages
-│   ├── hooks/       # Custom React hooks
-│   ├── utils/       # Helper functions
-│   └── App.tsx      # Root component
-└── package.json
+```
 
-🛠️ Tech Stack
+## Stack
 
-⚛️ React – Component-based UI
-
-🔍 React Router – Routing between pages
-
-🎨 CSS / Tailwind (optional) – Styling
-
-🗂️ Context / Hooks – State management
-Contributing
-
-Fork the repository
-
-Create a new branch (git checkout -b feature/amazing-feature)
-
-Commit your changes (git commit -m 'Add amazing feature')
-
-Push to the branch (git push origin feature/amazing-feature)
-
-Open a Pull Request
-
-📜 License
-
-This project is licensed under the MIT License – see the LICENSE file for details.
-
-👩‍💻 Author
-
-Parisa Zamani
-📧 parisa.zmni1994@gmail.com
-🔗 GitHub Profile
-
-🌐 Demo
-
-🚀 (Add link to your deployed app here: Netlify or Vercel)
+React, React Router, TanStack Query and Material UI. Recently visited contact data is stored in the browser's local storage; use sample data when sharing a device.

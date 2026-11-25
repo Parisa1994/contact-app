@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 export default function useTable(props) {
   const [orderBy, setOrderBy] = useState(props?.defaultOrderBy || "name");
 
-  const [order, setOrder] = useState(props?.defaultOrder || "createdAt");
+  const [order, setOrder] = useState(props?.defaultOrder || "asc");
 
   const [page, setPage] = useState(props?.defaultCurrentPage || 0);
 

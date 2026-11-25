@@ -8,9 +8,10 @@ const Search = ({ onApplyFilters }) => {
 
     useEffect(() => {
         if (tempFilters.first_name.length >= 5 || tempFilters.last_name.length >= 5) {
-            handleApplyFilters();
+            setIsFiltered(true);
+            onApplyFilters(tempFilters);
         }
-    }, [tempFilters?.first_name, tempFilters?.last_name]);
+    }, [tempFilters, onApplyFilters]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -53,6 +54,7 @@ const Search = ({ onApplyFilters }) => {
                 sx={{ flexGrow: 1 }}
             >
                 <TextField
+                    label="First name"
                     name="first_name"
                     value={tempFilters.first_name}
                     onChange={handleChange}
@@ -70,6 +72,7 @@ const Search = ({ onApplyFilters }) => {
                 />
 
                 <TextField
+                    label="Last name"
                     name="last_name"
                     value={tempFilters.last_name}
                     onChange={handleChange}

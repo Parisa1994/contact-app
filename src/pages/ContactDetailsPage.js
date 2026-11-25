@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import {
   Container,
   List,
@@ -11,10 +11,11 @@ import {
 } from "@mui/material";
 import { ContactContext } from "./../context/ContactProvider";
 
-const ContactDetailsPage = ({ contact }) => {
+const ContactDetailsPage = () => {
   const location = useLocation();
-  const { row } = location.state || {};
-  const { addVisitedContact } = useContext(ContactContext);
+  const { id } = useParams();
+  const { addVisitedContact, recentlyVisitedContacts } = useContext(ContactContext);
+  const row = location.state?.row || recentlyVisitedContacts.find((contact) => String(contact.id) === id);
 
   useEffect(() => {
     if (row) {
@@ -23,7 +24,7 @@ const ContactDetailsPage = ({ contact }) => {
   }, [row, addVisitedContact]);
 
   if (!row) {
-    return <Typography variant="h6">No contact details available</Typography>;
+    return <Container sx={{ p: 4 }}><Typography variant="h6">Contact details are not available. Open this contact from the list.</Typography><Link to="/">Back to contacts</Link></Container>;
   }
 
   return (
@@ -37,7 +38,7 @@ const ContactDetailsPage = ({ contact }) => {
             {row.avatar ? (
               <Avatar alt={`${row.first_name}'s avatar`} src={row.avatar} />
             ) : (
-              <Avatar>{row.first_name[0] + row.last_name[0]}</Avatar>
+              <Avatar>{(row.first_name?.[0] || "") + (row.last_name?.[0] || "")}</Avatar>
             )}
           </ListItemAvatar>
         </ListItem>
@@ -78,7 +79,6 @@ const ContactDetailsPage = ({ contact }) => {
             secondary={row?.company ? row?.company : "no Comapany"}
           />
         </ListItem>
-        company
         <ListItem>
           <ListItemText
             primary="Address"
